@@ -14,7 +14,7 @@ const getCart = async (req, res) => {
 
 
 const addCart = async (req, res) => {
-  const { product, quantity, total, user } = req.body;
+  const { productName, price, description,productImage,user } = req.body;
   let existingUser;
   try {
     existingUser = await User.findById(user);
@@ -26,10 +26,11 @@ const addCart = async (req, res) => {
   }
 
   const cart = new Cart({
-    product,
-    quantity,
-    total,
-    user,
+    productName, 
+    price,
+     description,
+     productImage,
+     user
   });
 
   try {
