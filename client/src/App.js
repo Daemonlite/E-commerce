@@ -10,6 +10,8 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 import Clothing from "./categories/Clothing";
 import Error from "./components/Error";
 import Cart from "./pages/Cart";
+import Kitchen from "./categories/Kitchen";
+import Beauty from "./categories/Beauty"
 
 function App() {
   return (
@@ -24,6 +26,8 @@ function App() {
     <Route path="/register" element={<Register/>} />
     <Route path='/clothing' element={<Clothing/>} />
     <Route path="/cart"  element={<Cart/>}/>
+    <Route path="/kitchen" element={<Kitchen/>} />
+    <Route path="/beauty" element={<Beauty/>} />
     <Route path="*" element={<Error/>} />
   </Routes>
   </BrowserRouter>

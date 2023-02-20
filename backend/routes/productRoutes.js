@@ -4,7 +4,7 @@ const  {getProducts,addProduct,deleteProduct,updateProduct} =
  require('../Handlers/productHandler')
 
 router.get('/',getProducts)
-router.post('/',verifyToken,addProduct)
+router.post('/',addProduct)
 router.put('/:id',verifyToken,updateProduct)
 router.delete('/:id',verifyToken,deleteProduct)
 

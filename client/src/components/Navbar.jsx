@@ -1,11 +1,10 @@
 import { useState,useEffect } from 'react'
 import {BsCart3} from 'react-icons/bs'
-import {FaUserAlt} from  'react-icons/fa' 
-import { CartState } from '../Context'
+
 import {useNavigate} from 'react-router-dom'
 
 const Navbar = () => {
-  const { cartItem}= CartState()
+  
 
   const navigate = useNavigate()
 
@@ -21,41 +20,72 @@ const Navbar = () => {
     },[]);
   return (
     <div className='all'>
-      <div className="nav">
-      <div className="nav-brand">
-           <a href="/">Sigma</a>
-        </div>
-
-        <form className="nosubmit">
-              <input className="nosubmit" type="search" placeholder="Search Sigma" />
-          </form>
-
-        <div className="left">
-         
-       {user && <div type="button" className=" position-relative ">
-<a href="/cart">  <BsCart3 size={30}/></a>
-  <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger cart" count={cartItem}>
-    
-    <span className="visually-hidden">cart items</span>
-  </span>
-</div>}
-       
-       
-        <div className="dropdown">
-  <div className="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-  <FaUserAlt/>
-  </div>
-  <ul className="dropdown-menu">
-    <li>{!user &&<a className="dropdown-item text-center" href="/login ">Login</a>}</li>
-    <li> {user &&  <div onClick={logout} className="dropdown-item text-center" >Logout</div> }</li>
-    <li><p className="dropdown-item text-center"  >{ user && user.username}</p></li>
-
-  </ul>
-</div>
-        
-        </div>
+      <nav className="navbar navbar-dark bg-dark fixed-top">
+  <div className="container-fluid">
+    <a className="navbar-brand" href="/">SigmaMart</a>
+    <button className="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
+      <span className="navbar-toggler-icon"></span>
+    </button>
+    <div className="offcanvas offcanvas-end text-bg-dark" tabIndex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+      <div className="offcanvas-header">
+        <h5 className="offcanvas-title" id="offcanvasDarkNavbarLabel">SigmaMart</h5>
+        <button type="button" className="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
-      <hr />
+      <div className="offcanvas-body">
+        <ul className="navbar-nav justify-content-end flex-grow-1 pe-3">
+          <li className="nav-item">
+            <a className="nav-link active" aria-current="page" href="/">Home</a>
+          </li>
+          <li className="nav-item">
+            <a className="nav-link" href="/">Services</a>
+          </li>
+        {user && <li className="nav-item">
+            <a className="nav-link" href="/cart"><BsCart3/>cart</a>
+          </li>}
+          <li className="nav-item dropdown">
+            <a className="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Products
+            </a>
+            <ul className="dropdown-menu dropdown-menu-dark">
+              <li><a className="dropdown-item" href="/clothing">Clothing</a></li>
+              <li><a className="dropdown-item" href="/kitchen">Kitchen</a></li>
+              <li><a className="dropdown-item" href="/beauty">Beauty Products</a></li>
+              <li><a className="dropdown-item" href="/fitness">Gym/Fitness</a></li>
+              <li><a className="dropdown-item" href="/electronics">Electronics</a></li>
+              <li><a className="dropdown-item" href="/gaming">Gaming</a></li>
+              <li><a className="dropdown-item" href="/furniture">Home/office Furniture</a></li>
+              <li>
+              </li>
+              <li><a className="dropdown-item" href="/">Health & personal care</a></li>
+            </ul>
+          </li>
+          {user ? (
+            <li className="nav-item dropdown">
+            <a className="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+             Profile
+            </a>
+            <ul className="dropdown-menu dropdown-menu-dark">
+              <li><a className="dropdown-item" href="/">welcome {user.username}</a></li>
+              <li className="dropdown-item" onClick={logout}>Logout</li>
+             
+              <li>
+              </li>
+              
+            </ul>
+          </li>
+          ):(
+            <li><a className="dropdown-item" href="/login">Login</a></li>
+          )}
+          
+        </ul>
+
+      </div>
+    </div>
+  </div>
+</nav>
+      <br />
+      <br />
+      <br />
     </div>
   )
 }

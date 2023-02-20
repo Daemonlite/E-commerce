@@ -5,7 +5,7 @@ const {verifyToken} = require('../middleware/verify')
 
 router.get('/',getCart)
 router.post('/',addCart)
-router.delete('/:id',verifyToken,deleteCart)
+router.delete('/:id',deleteCart)
 
 module.exports = router
 

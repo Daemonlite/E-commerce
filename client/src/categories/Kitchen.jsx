@@ -9,47 +9,48 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
-const Clothing = () => {
-  const [product, setProduct] = useState([]);
-  const [user, setuser] = useState("");
-
-
-  useEffect(() => {
-    axios
-      .get("http://localhost:7000/api/products/")
-      .then((res) => setProduct(res.data))
-      .catch((error) => console.log(error));
-  }, []);
-
-  const filteredProducts = product.filter((res) => res.category === "Clothing");
-
-  useState(() => {
-    const User = JSON.parse(localStorage.getItem("userInfo"));
-    setuser(User);
-  }, []);
-
-  const addCart = (res) => {
-    axios
-      .post("http://localhost:7000/api/cart/", {
-        productName: res.productName,
-        price: res.price,
-        description: res.description,
-        productImage: res.image1,
-        user: user._id,
-      })
-      .then((res) => {
-        console.log(res.data);
-        toast.success("added to cart");
-        // setCartItem(prevState=>prevState + 1)
-      })
-      .catch((err) => {
-        console.log(err);
-        toast.error("Login to continue");
-      });
-  };
-
+const Kitchen = () => {
+    const [product, setProduct] = useState([]);
+    const [user, setuser] = useState("");
+  
+  
+    useEffect(() => {
+      axios
+        .get("http://localhost:7000/api/products/")
+        .then((res) => setProduct(res.data))
+        .catch((error) => console.log(error));
+    }, []);
+  
+    const filteredProducts = product.filter((res) => res.category === "Kitchen");
+  
+    useState(() => {
+      const User = JSON.parse(localStorage.getItem("userInfo"));
+      setuser(User);
+    }, []);
+  
+    const addCart = (res) => {
+   
+      axios
+        .post("http://localhost:7000/api/cart/", {
+          productName: res.productName,
+          price: res.price,
+          description: res.description,
+          productImage: res.image1,
+          user: user._id,
+        })
+        .then((res) => {
+          console.log(res.data);
+          toast.success("added to cart");
+          // setCartItem(prevState=>prevState + 1)
+        })
+        .catch((err) => {
+          console.log(err);
+          toast.error("an error ocurred");
+        });
+    };
   return (
-    <>
+    <div>
+         <>
       <br />
       <div className="prods">
         {filteredProducts.map((res) => (
@@ -72,7 +73,7 @@ const Clothing = () => {
                   </Typography>
                 </CardContent>
                 <CardActions>
-                {user && <Button size="small" onClick={()=>addCart(res)}>Add Cart</Button>}
+                  {user && <Button size="small" onClick={()=>addCart(res)}>Add Cart</Button>}
                   <Button size="small">view More</Button>
                 </CardActions>
               </Card>
@@ -81,7 +82,8 @@ const Clothing = () => {
         ))}
       </div>
     </>
-  );
-};
+    </div>
+  )
+}
 
-export default Clothing;
+export default Kitchen

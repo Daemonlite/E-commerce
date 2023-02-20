@@ -1,56 +1,54 @@
+import React from 'react'
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
-import * as React from "react";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-
-const Clothing = () => {
-  const [product, setProduct] = useState([]);
-  const [user, setuser] = useState("");
-
-
-  useEffect(() => {
-    axios
-      .get("http://localhost:7000/api/products/")
-      .then((res) => setProduct(res.data))
-      .catch((error) => console.log(error));
-  }, []);
-
-  const filteredProducts = product.filter((res) => res.category === "Clothing");
-
-  useState(() => {
-    const User = JSON.parse(localStorage.getItem("userInfo"));
-    setuser(User);
-  }, []);
-
-  const addCart = (res) => {
-    axios
-      .post("http://localhost:7000/api/cart/", {
-        productName: res.productName,
-        price: res.price,
-        description: res.description,
-        productImage: res.image1,
-        user: user._id,
-      })
-      .then((res) => {
-        console.log(res.data);
-        toast.success("added to cart");
-        // setCartItem(prevState=>prevState + 1)
-      })
-      .catch((err) => {
-        console.log(err);
-        toast.error("Login to continue");
-      });
-  };
-
+const Beauty = () => {
+    const [product, setProduct] = useState([]);
+    const [user, setuser] = useState("");
+  
+  
+    useEffect(() => {
+      axios
+        .get("http://localhost:7000/api/products/")
+        .then((res) => setProduct(res.data))
+        .catch((error) => console.log(error));
+    }, []);
+  
+    const filteredProducts = product.filter((res) => res.category === "Beauty Products");
+  
+    useState(() => {
+      const User = JSON.parse(localStorage.getItem("userInfo"));
+      setuser(User);
+    }, []);
+  
+    const addCart = (res) => {
+      axios
+        .post("http://localhost:7000/api/cart/", {
+          productName: res.productName,
+          price: res.price,
+          description: res.description,
+          productImage: res.image1,
+          user: user._id,
+        })
+        .then((res) => {
+          console.log(res.data);
+          toast.success("added to cart");
+          // setCartItem(prevState=>prevState + 1)
+        })
+        .catch((err) => {
+          console.log(err);
+          toast.error("Login to continue");
+        });
+    };
   return (
-    <>
-      <br />
+    <div>
+        <br />
       <div className="prods">
         {filteredProducts.map((res) => (
           <div key={res._id}>
@@ -79,9 +77,9 @@ const Clothing = () => {
             </>
           </div>
         ))}
-      </div>
-    </>
-  );
-};
+      </div> 
+    </div>
+  )
+}
 
-export default Clothing;
+export default Beauty
