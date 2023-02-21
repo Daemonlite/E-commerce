@@ -152,6 +152,10 @@ object-position: center;
   float: right;
   margin-right: 20px;
 }
+.bli{
+  float: right;
+  margin-right: 10px;
+}
 .key{
   border: 1px solid #fff ;
   height: 320px;
@@ -199,6 +203,10 @@ nav{
 .search{
   width: 50%;
 margin: auto;
+}
+.google{
+  float: right;
+  margin-right: 10px;
 }
 
 

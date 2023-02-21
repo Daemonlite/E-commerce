@@ -12,7 +12,6 @@ import Error from "./components/Error";
 import Cart from "./pages/Cart";
 import Kitchen from "./categories/Kitchen";
 import Beauty from "./categories/Beauty"
-
 function App() {
   return (
     <div>
@@ -20,6 +19,7 @@ function App() {
   <BrowserRouter>
   <ToastContainer position='top-center'/>
   <Navbar/> 
+
   <Routes>
     <Route path="/" element={<Header/>} />
     <Route path="/login" element={<Login/>}/>
@@ -28,6 +28,7 @@ function App() {
     <Route path="/cart"  element={<Cart/>}/>
     <Route path="/kitchen" element={<Kitchen/>} />
     <Route path="/beauty" element={<Beauty/>} />
+    
     <Route path="*" element={<Error/>} />
   </Routes>
   </BrowserRouter>

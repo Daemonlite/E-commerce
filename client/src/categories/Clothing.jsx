@@ -64,7 +64,7 @@ const Clothing = () => {
                 />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
-                    ${res.price}
+                    ${res.price} {res.productName}
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
                     {res.description}

@@ -10,6 +10,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import {useNavigate} from 'react-router-dom'
+import GooglePayButton from "@google-pay/button-react";
 
 const Cart = () => {
   const navigate = useNavigate()
@@ -44,11 +45,63 @@ setCartItem(filteredCart.length)
       toast.error('an error ocurred')
     })
   }
+  
   return (
     <div>
       <br />
       
        <div className="btn btn-success but">total:: ${all}</div>
+       <div className="google ">
+      <GooglePayButton
+        environment="TEST"
+        paymentRequest={{
+          apiVersion: 2,
+          apiVersionMinor: 0,
+          allowedPaymentMethods: [
+            {
+              type: "CARD",
+              parameters: {
+                allowedAuthMethods: ["PAN_ONLY", "CRYPTOGRAM_3DS"],
+                allowedCardNetworks: ["MASTERCARD", "VISA"],
+              },
+              tokenizationSpecification: {
+                type: "PAYMENT_GATEWAY",
+                parameters: {
+                  gateway: "example",
+                  gatewayMerchantId: "exampleGatewayMerchantId",
+                },
+              },
+            },
+          ],
+          merchantInfo: {
+            merchantId: "12345678901234567890",
+            merchantName: "Demo Merchant",
+          },
+          transactionInfo: {
+            totalPriceStatus: "FINAL",
+            totalPriceLabel: "Total",
+            totalPrice: `${all}`,
+            currencyCode: "GHS",
+            countryCode: "GH",
+          },
+          shippingAddressRequired: true,
+          callbackIntents: ["PAYMENT_AUTHORIZATION"],
+        }}
+        onLoadPaymentData={(paymentRequest) => {
+          console.log(paymentRequest);
+        }}
+        onPaymentAuthorized={paymentData =>{
+          console.log('paymentData ' + paymentData);
+          return { transactionState: 'SUCCESS'}
+        }}
+        existingPaymentMethodRequired='false'
+        buttonColor="black"
+        buttonType="buy"
+      ></GooglePayButton>
+      </div>
+        
+       
+  
       <div className="carts">
        
         {filteredCart.map((res) => (
@@ -71,13 +124,19 @@ setCartItem(filteredCart.length)
                 </CardContent>
                 <CardActions>
                   <Button size="small" onClick={()=>deleteItem(res._id)}>Remove</Button>
-                  <Button size="small">view More</Button>
+ 
                 </CardActions>
               </Card>
+
           </div>
       
         ))}
+
+
       </div>
+      <br />
+
+     
     </div>
   );
 };
